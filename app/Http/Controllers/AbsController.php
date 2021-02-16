@@ -39,13 +39,16 @@ class AbsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_matakuliah'=>'required',
-            'sks' => 'required|numeric',
+            'waktu_absen' => 'required',
+            'mahasiswa_id' =>'required|numeric',
+            'matakuliah_id'=>'required',
+            'keterangan'=>'required',
+
         ]);
 
-        Post::create($request->all());
-        return redirect()->route('matakuliahs.index')
-            ->with ('success','Matakuliah created successfully.');
+        absensi::create($request->all());
+        return redirect('absensis')
+            ->with ('success','Absensi created successfully.');
     }
 
 
@@ -55,9 +58,10 @@ class AbsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( Absensi $id)
     {
-        return view('matakuliahs.show',compact('post'));
+        $absensi = absensi::find($id);
+        return view('absensis.show',compact('absensi'));
     }
 
     /**
@@ -68,7 +72,8 @@ class AbsController extends Controller
      */
     public function edit($id)
     {
-        return view('matakuliahs.edit',compact('post'));
+        $absensi = absensi::findOrFail($id);
+        return view('absensis.edit',['absensi'=>$absensi]);
     }
 
     /**
@@ -81,10 +86,10 @@ class AbsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_matakuliah'=>'required',
-            'waktu_absen' => 'required|datetime',
-            'nama_mahasiswa' =>'required',
-            'matakuliah'=>'required',
+            'waktu_absen' => 'required',
+            'mahasiswa_id' =>'required',
+            'matakuliah_id'=>'required',
+            'keterangan'=>'required',
         ]);
 
         Post::update($request->all());

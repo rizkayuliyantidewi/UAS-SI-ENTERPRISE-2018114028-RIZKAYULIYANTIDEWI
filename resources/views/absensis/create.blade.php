@@ -30,19 +30,19 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Waktu Absen:</strong>
-                <input type="datetime" name="waktu_absen" class="form-control" placeholder="Waktu Absen">
+                <input type="time" name="waktu_absen" class="form-control" placeholder="Waktu Absen">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nama Mahasiswa:</strong>
-                <input type="string" name="nama_mahasiswa" class="form-control" placeholder="Nama Mahasiswa">
+                <strong>Mahasiswa_id:</strong>
+                <input type="string" name="mahasiswa_id" class="form-control" placeholder="Mahasiswa_id">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Mata Kuliah:</strong>
-                <input type="string" name="mata_kuliah" class="form-control" placeholder="Mata Kuliah">
+                <strong>MataKuliah_id:</strong>
+                <input type="string" name="matakuliah_id" class="form-control" placeholder="MataKuliah_id">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class absensi extends Model
+class kontrak extends Model
 {
     use HasFactory;
     protected $guarded = ['name'];
-
-    public function mahasiswa()
-
-    {
-        return $this->hasMany('App\Models\mahasiswa');
-    }
+    protected $fillable = ['mahasiswa_id','semester_id',];
 }

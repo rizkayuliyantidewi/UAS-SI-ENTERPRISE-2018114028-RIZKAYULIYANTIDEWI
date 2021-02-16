@@ -10,19 +10,22 @@
 
     <title>@yield('Data Mahasiswa UCIC')</title>
   </head>
-  <body>
+  <body style ="background-color:grey;">
 
   <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-        <a class="navbar-brand" href="/#">Aplikasi Absensi Mahasiswa</a>
+        <a class="navbar-brand" href="/#">Aplikasi Absensi Mahasiswa UCIC </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-            <a class="nav-link active" href="/mahasiswas">Tabel Mahasiswa</a>
-            <a class="nav-link" href="/matakuliahs">Tabel Mata Kuliah</a>
-            <a class="nav-link" href="/absensis">Tabel Absensi</a>
+            <a class="nav-link active" href="/mahasiswas"> Mahasiswa</a>
+            <a class="nav-link" href="/matakuliahs">Mata Kuliah</a>
+            <a class="nav-link" href="/absensis">Absensi</a>
+            <a class="nav-link" href="/kontraks"> Kontrak Mata Kuliah</a>
+            <a class="nav-link" href="/jadwals">Jadwal</a>
+            <a class="nav-link" href="/semesters"> Semester</a>
             </div>
         </div>
         </nav>
@@ -33,6 +36,26 @@
 
 
   </div>
+  
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

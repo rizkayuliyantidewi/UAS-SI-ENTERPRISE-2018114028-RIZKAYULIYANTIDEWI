@@ -23,7 +23,7 @@
         </div>
     @endif
  
-    <form action="{{ route('mahasiswas.update',$post->id) }}" method="POST">
+    <form action="{{ route('mahasiswas.update',$mahasiswa->id) }}" method="POST">
         @csrf
         @method('PUT')
  
@@ -52,7 +52,7 @@
                 <input type="string" name="email" class="form-control" placeholder="Email">
             </div>
         </div>
-           -12 col-sm-12 col-md-12 text-center">
+          <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>

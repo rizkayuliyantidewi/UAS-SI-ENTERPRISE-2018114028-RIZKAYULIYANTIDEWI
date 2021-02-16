@@ -43,7 +43,7 @@ class MtkController extends Controller
             'sks' => 'required|numeric',
         ]);
 
-        Post::create($request->all());
+        matakuliah::create($request->all());
         return redirect()->route('matakuliahs.index')
             ->with ('success','Matakuliah created successfully.');
     }
@@ -57,7 +57,8 @@ class MtkController extends Controller
      */
     public function show($id)
     {
-        return view('matakuliahs.show',compact('post'));
+        $matakuliah = matakuliah::findOrFail($id);
+        return view('matakuliahs.show',['matakuliah'=>$matakuliah]);
     }
 
     /**
@@ -68,7 +69,8 @@ class MtkController extends Controller
      */
     public function edit($id)
     {
-        return view('matakuliahs.edit',compact('post'));
+        $matakuliah = matakuliah::findOrFail($id);
+        return view('matakuliahs.edit',['matakuliah'=>$matakuliah]);
     }
 
     /**
@@ -98,8 +100,8 @@ class MtkController extends Controller
      */
     public function destroy($id)
     {
-        Post::delete();
-        return redirect()->route('matakuliahs.index')
-            ->with ('success','Matakuliah deleted successfully.');
+        $matakuliah = matakuliah :: where ('id',$id)->first();
+        $matakuliah -> delete(); return redirect()->route('matakuliahs.index');
+        with('success', 'Matakuliah deleted succesfully');
     }
 }

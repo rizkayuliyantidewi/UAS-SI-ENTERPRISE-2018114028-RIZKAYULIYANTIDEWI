@@ -4,10 +4,10 @@
     <div class="row mt-5 mb-5">
         <div class="col-lg-12 margin-tb">
             <div class="float-left">
-                <h2>Data Absensi</h2>
+                <h2>Data Jadwal</h2>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('absensis.create') }}"> Tambah Absensi</a>
+                <a class="btn btn-success" href="{{ route('jadwals.create') }}"> Tambah Jadwal</a>
             </div>
         </div>
     </div>
@@ -22,36 +22,32 @@
         <tr>
         
             <th width="20px" class="text-center">Id</th>
-            <th>Waktu Absen</th>
-            <th>Mahasiswa_id</th>
+            <th>Jadwal</th>
             <th>Matakuliah_id</th>
-            <th>Keterangan</th>
             <th width="280px"class="text-center">Action</th>
         </tr>
-        @foreach ($absensis as $post)
+        @foreach ($jadwals as $post)
         <tr>
             <td class="text-center">{{ ++$i }}</td>
-            <td>{{ $post->waktu_absen}}</td>
-            <td>{{ $post->mahasiswa_id }}</td>
+            <td>{{ $post->jadwal}}</td>
             <td>{{ $post->matakuliah_id }}</td>
-            <td>{{ $post->keterangan }}</td>
             <td class="text-center">
-                <form action="{{ route('mahasiswas.destroy',$post->id) }}" method="POST">
+                <form action="{{ route('jadwals.destroy',$post->id) }}" method="POST">
  
-                    <a class="btn btn-info btn-sm" href="{{ route('absensis.show',$post->id) }}">Absen Disini</a>
+                    <a class="btn btn-info btn-sm" href="{{ route('jadwals.show',$post->id) }}">Hadir</a>
  
-                    <a class="btn btn-primary btn-sm" href="{{ route('absensis.edit',$post->id) }}">Edit Absen</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('jadwals.edit',$post->id) }}">Edit</a>
  
                     @csrf
                     @method('DELETE')
  
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete Absen</button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
                 </form>
             </td>
         </tr>
         @endforeach
     </table>
  
-    {!! $absensis->links() !!}
+    {!! $jadwals->links() !!}
  
 @endsection

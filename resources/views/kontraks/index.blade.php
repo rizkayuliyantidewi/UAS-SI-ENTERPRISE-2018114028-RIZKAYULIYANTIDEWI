@@ -4,10 +4,10 @@
     <div class="row mt-5 mb-5">
         <div class="col-lg-12 margin-tb">
             <div class="float-left">
-                <h2>Data Mahasiswa</h2>
+                <h2>Data Kontrak Matakuliah</h2>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('mahasiswas.create') }}"> Tambah Mahasiswa</a>
+                <a class="btn btn-success" href="{{ route('kontraks.create') }}"> Tambah Kontrak MataKuliah</a>
             </div>
         </div>
     </div>
@@ -20,27 +20,22 @@
  
     <table class="table table-bordered">
         <tr>
-        
             <th width="20px" class="text-center">Id</th>
-            <th>Nama Mahasiswa</th>
-            <th>Alamat</th>
-            <th>No Telepon</th>
-            <th>Email</th>
+            <th>Mahasiswa_id</th>
+            <th>Semester_id</th>
             <th width="280px"class="text-center">Action</th>
         </tr>
-        @foreach ($mahasiswas as $post)
+        @foreach($kontraks as $post)
         <tr>
             <td class="text-center">{{ ++$i }}</td>
-            <td>{{ $post->nama_mahasiswa}}</td>
-            <td>{{ $post->alamat }}</td>
-            <td>{{ $post->no_tlp }}</td>
-            <td>{{ $post->email }}</td>
+            <td>{{ $post->mahasiswa_id}}</td>
+            <td>{{ $post->semester_id }}</td>
             <td class="text-center">
-                <form action="{{ route('mahasiswas.destroy',$post->id) }}" method="POST">
+                <form action="{{ route('kontraks.destroy',$post->id) }}" method="POST">
  
-                    <a class="btn btn-info btn-sm" href="{{ route('mahasiswas.show',$post->id) }}">Hadir</a>
+                    <a class="btn btn-info btn-sm" href="{{ route('kontraks.show',$post->id) }}">Tampil</a>
  
-                    <a class="btn btn-primary btn-sm" href="{{ route('mahasiswas.edit',$post->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('kontraks.edit',$post->id) }}">Edit</a>
  
                     @csrf
                     @method('DELETE')
@@ -52,6 +47,6 @@
         @endforeach
     </table>
  
-    {!! $mahasiswas->links() !!}
+    {!! $kontraks->links() !!}
  
 @endsection

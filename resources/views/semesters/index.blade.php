@@ -4,10 +4,10 @@
     <div class="row mt-5 mb-5">
         <div class="col-lg-12 margin-tb">
             <div class="float-left">
-                <h2>Data Mahasiswa</h2>
+                <h2>Data Semester</h2>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('mahasiswas.create') }}"> Tambah Mahasiswa</a>
+                <a class="btn btn-success" href="{{ route('semesters.create') }}"> Tambah Semester</a>
             </div>
         </div>
     </div>
@@ -22,25 +22,20 @@
         <tr>
         
             <th width="20px" class="text-center">Id</th>
-            <th>Nama Mahasiswa</th>
-            <th>Alamat</th>
-            <th>No Telepon</th>
-            <th>Email</th>
+            <th>Semester</th>
             <th width="280px"class="text-center">Action</th>
         </tr>
-        @foreach ($mahasiswas as $post)
+        @foreach ($semesters as $post)
         <tr>
             <td class="text-center">{{ ++$i }}</td>
-            <td>{{ $post->nama_mahasiswa}}</td>
-            <td>{{ $post->alamat }}</td>
-            <td>{{ $post->no_tlp }}</td>
-            <td>{{ $post->email }}</td>
+            <td>{{ $post->semester}}</td>
+          
             <td class="text-center">
-                <form action="{{ route('mahasiswas.destroy',$post->id) }}" method="POST">
+                <form action="{{ route('semesters.destroy',$post->id) }}" method="POST">
  
-                    <a class="btn btn-info btn-sm" href="{{ route('mahasiswas.show',$post->id) }}">Hadir</a>
+                    
  
-                    <a class="btn btn-primary btn-sm" href="{{ route('mahasiswas.edit',$post->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ route('semesters.edit',$post->id) }}">Edit</a>
  
                     @csrf
                     @method('DELETE')
@@ -52,6 +47,6 @@
         @endforeach
     </table>
  
-    {!! $mahasiswas->links() !!}
+    {!! $semesters->links() !!}
  
 @endsection

@@ -14,11 +14,11 @@ class CreateAbsensisTable extends Migration
     public function up()
     {
         Schema::create('absensis', function (Blueprint $table) {
-            $table->id();
-            $table->date(waktu_absen);
-            $table->string(nama_mahasiswa);
-            $table->varchar(matakuliah);
-            $table->varchar(keterangan);
+            $table->increments('id');
+            $table->time('waktu_absen');
+            $table->string('mahasiswa_id');
+            $table->string('matakuliah_id');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

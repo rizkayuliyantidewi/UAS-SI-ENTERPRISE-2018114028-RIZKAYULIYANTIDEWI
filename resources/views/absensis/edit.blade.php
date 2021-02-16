@@ -23,7 +23,7 @@
         </div>
     @endif
  
-    <form action="{{ route('absensis.update',$post->id) }}" method="POST">
+    <form action="{{ route('absensis.update',$absensi->id) }}" method="POST">
         @csrf
         @method('PUT')
  
@@ -31,28 +31,28 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
             <strong>waktu_absen:</strong>
-                <input type="datetime" name="waktu_absen" class="form-control" placeholder="Waktu Absen">
+                <input type="time" name="waktu_absen" class="form-control" placeholder="Waktu Absen">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-            <strong>Nama Mahasiswa:</strong>
-                <input type="string" name="alamat" class="form-control" placeholder="Nama Mahasiswa">
+            <strong>Mahasiswa_id:</strong>
+                <input type="string" name="mahasiswa_id" class="form-control" placeholder="Mahasiswa_id">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-            <strong>Mata Kuliah:</strong>
-                <input type="string" name="matakuliah" class="form-control" placeholder="Mata Kuliah">
+            <strong>MataKuliah_id:</strong>
+                <input type="string" name="matakuliah_id" class="form-control" placeholder="MataKuliah_id">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-            <strong>Keterangan/strong>
+            <strong>Keterangan:</strong>
                 <input type="string" name="keterangan" class="form-control" placeholder="Keterangan">
             </div>
         </div>
-           <-12 col-sm-12 col-md-12 text-center">
+           <div class="<-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>

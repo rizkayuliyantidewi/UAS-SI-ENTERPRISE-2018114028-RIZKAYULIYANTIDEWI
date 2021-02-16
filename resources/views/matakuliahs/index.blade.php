@@ -35,7 +35,7 @@
             <td class="text-center">
                 <form action="{{ route('matakuliahs.destroy',$post->id) }}" method="POST">
  
-                    <a class="btn btn-info btn-sm" href="{{ route('matakuliahs.show',$post->id) }}">Lihat</a>
+                   
  
                     <a class="btn btn-primary btn-sm" href="{{ route('matakuliahs.edit',$post->id) }}">Edit</a>
  
@@ -51,4 +51,7 @@
  
     {!! $matakuliahs->links() !!}
  
+
+
+
 @endsection

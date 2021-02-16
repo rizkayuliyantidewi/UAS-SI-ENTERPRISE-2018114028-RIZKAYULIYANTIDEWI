@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class mahasiswa extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
-    protected $fillable = ['nama_mahasiswa','alamat','no_tlp','email',];
+    protected $guarded = ['name'];
+
+    public function absensi()
+
+    {
+        return $this->hasMany('App\Models\absensi');
+    }
 }

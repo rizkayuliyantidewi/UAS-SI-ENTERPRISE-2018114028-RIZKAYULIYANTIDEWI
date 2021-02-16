@@ -10,4 +10,9 @@ class jadwal extends Model
     use HasFactory;
     protected $guarded = ['id'];
     protected $fillable = ['jadwal','matakuliah_id',];
+
+    public function matakuliah()
+    {
+        return $this->belongsTo(matakuliah::class);
+    }
 }

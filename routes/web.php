@@ -7,13 +7,6 @@ use App\Http\Controllers\JdwlController;
 use App\Http\Controllers\SmtController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('mahasiswas',MhsController::class);
-Route::resource('matakuliahs',MtkController::class);
-Route::resource('absensis',AbsController::class);
-Route::resource('kontraks',KontrakController::class);
-Route::resource('jadwals',JdwlController::class);
-Route::resource('semesters',SmtController::class);
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,11 +18,18 @@ Route::resource('semesters',SmtController::class);
 |
 */
 
-Route::get('',[MhsController::class,'index']);
-Route::get('',[MtkController::class,'index']);
-Route::get('',[AbsController::class,'index']);
-Route::get('',[KontrakController::class,'index']);
-Route::get('',[JdwlController::class,'index']);
-Route::get('',[SmtController::class,'index']);
-Route::POST('submit', 'MhsController@submit')->name('submit');
-Route::delete('/mahasiswas/{id}', [MhsController::class,'destroy']);
+Route::resource('mahasiswas',MhsController::class);
+Route::resource('matakuliahs',MtkController::class);
+Route::resource('absensis',AbsController::class);
+Route::resource('kontraks',KontrakController::class);
+Route::resource('jadwals',JdwlController::class);
+Route::resource('semesters',SmtController::class);
+
+// Route::get('',[MhsController::class,'index']);
+// Route::get('',[MtkController::class,'index']);
+// Route::get('',[AbsController::class,'index']);
+// Route::get('',[KontrakController::class,'index']);
+// Route::get('',[JdwlController::class,'index']);
+// Route::get('',[SmtController::class,'index']);
+// Route::POST('submit', 'MhsController@submit')->name('submit');
+// Route::delete('/mahasiswas/{id}', [MhsController::class,'destroy']);

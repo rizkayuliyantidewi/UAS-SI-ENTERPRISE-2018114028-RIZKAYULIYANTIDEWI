@@ -14,28 +14,47 @@
      </div>
   
      <div class="row">
-         <div class="col-xs-12 col-sm-12 col-md-12">
-             <div class="form-group">
-                 <strong>Nama Mahasiswa:</strong>
-                 {{ $mahasiswa->nama_mahasiswa }}
-             </div>
-         </div>
-         <div class="col-xs-12 col-sm-12 col-md-12">
-             <div class="form-group">
-                 <strong>Alamat:</strong>
-                 {{ $mahasiswa->alamat }}
-             </div>
-             <div class="col-xs-12 col-sm-12 col-md-12">
-             <div class="form-group">
-                 <strong>No Telepon:</strong>
-                 {{ $mahasiswa->no_tlp }}
-             </div>
-             <div class="col-xs-12 col-sm-12 col-md-12">
-             <div class="form-group">
-                 <strong>Email:</strong>
-                 {{ $mahasiswa->email }}
-             </div>
-         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Nama Mahasiswa:</strong>
+                {{ $mahasiswa->nama_mahasiswa }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Alamat:</strong>
+                {{ $mahasiswa->alamat }}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>No Telepon:</strong>
+                {{ $mahasiswa->no_tlp }}
+            </div>
+        </div>
+            
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Email:</strong>
+                {{ $mahasiswa->email }}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Absensi:</strong>
+                @if ($mahasiswa->absensi->count() > 0)
+                    <ul>
+                        @foreach ($mahasiswa->absensi as $item)
+                            <li>{{ $item->matakuliah->nama_matakuliah }} | {{ date('d M Y', strtotime($item->tanggal_absen)) }} {{ $item->waktu_absen }} | {{ $item->keterangan }}</li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>Belum ada absensi.</p>
+                @endif
+            </div>
+        </div>
      </div>
  @endsection
  

@@ -15,6 +15,7 @@ class MhsController extends Controller
     public function index()
     {
         $mahasiswas = mahasiswa::latest()->paginate(5);
+        
         return view ('mahasiswas.index',compact('mahasiswas'))
         ->with('i',(request()->input('page',1)-1)*5);
     
@@ -25,10 +26,10 @@ class MhsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('mahasiswas.create');
-    }
+    // public function create()
+    // {
+    //     return view('mahasiswas.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -59,7 +60,8 @@ class MhsController extends Controller
      */
     public function show($id)
     {
-        $mahasiswa = mahasiswa::findOrFail($id);
+        $mahasiswa = mahasiswa::with('absensi')->findOrFail($id);
+        
         return view('mahasiswas.show',['mahasiswa'=>$mahasiswa]);
     }
 
@@ -69,11 +71,11 @@ class MhsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $mahasiswa = mahasiswa::findOrFail($id);
-        return view('mahasiswas.edit',['mahasiswa'=>$mahasiswa]);
-    }
+    // public function edit($id)
+    // {
+    //     $mahasiswa = mahasiswa::findOrFail($id);
+    //     return view('mahasiswas.edit',['mahasiswa'=>$mahasiswa]);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -90,10 +92,19 @@ class MhsController extends Controller
             'no_tlp' => 'required|numeric',
             'email'=> 'required',
         ]);
+        
+        $mahasiswa = mahasiswa::where('id', $id)->first();
+        if(!$mahasiswa)
+            abort(404);
 
-        post::update($request->all());
+        $mahasiswa->nama_mahasiswa = $request->nama_mahasiswa;
+        $mahasiswa->alamat = $request->alamat;
+        $mahasiswa->no_tlp = $request->no_tlp;
+        $mahasiswa->email = $request->email;
+        $mahasiswa->save();
+
         return redirect()->route('mahasiswas.index')
-            ->with ('success','Mahasiswa updated successfully.');
+            ->with('success','Mahasiswa updated successfully.');
     }
 
     /**
@@ -104,9 +115,13 @@ class MhsController extends Controller
      */
     public function destroy($id)
     {
-       $mahasiswa = mahasiswa :: where ('id',$id)->first();
-      $mahasiswa -> delete(); return redirect()->route('mahasiswas.index');
-      with('success', 'Mahasiswa deleted succesfully');
-       
+        $mahasiswa = mahasiswa::where('id',$id)->first();
+        if(!$mahasiswa)
+            abort(404);
+            
+        $mahasiswa->delete();
+        
+        return redirect()->route('mahasiswas.index')
+            ->with('success', 'Mahasiswa deleted succesfully');
     }
 }

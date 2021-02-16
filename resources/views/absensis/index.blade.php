@@ -7,35 +7,33 @@
                 <h2>Data Absensi</h2>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('absensis.create') }}"> Tambah Absensi</a>
+                <button class="btn btn-success" data-toggle="modal" data-target="#createModal">Tambah Absensi</button>
             </div>
         </div>
     </div>
  
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-    @endif
+    @include('shared.alert')
  
     <table class="table table-bordered">
         <tr>
         
-            <th width="20px" class="text-center">Id</th>
+            <th width="20px" class="text-center">No</th>
+            <th>Tanggal Absen</th>
             <th>Waktu Absen</th>
-            <th>Mahasiswa_id</th>
-            <th>Matakuliah_id</th>
+            <th>Nama Mahasiswa</th>
+            <th>Matakuliah</th>
             <th>Keterangan</th>
-            <th width="280px"class="text-center">Action</th>
+            {{-- <th width="280px"class="text-center">Action</th> --}}
         </tr>
         @foreach ($absensis as $post)
         <tr>
             <td class="text-center">{{ ++$i }}</td>
-            <td>{{ $post->waktu_absen}}</td>
-            <td>{{ $post->mahasiswa_id }}</td>
-            <td>{{ $post->matakuliah_id }}</td>
+            <td>{{ date('d M Y', strtotime($post->tanggal_absen)) }}</td>
+            <td>{{ $post->waktu_absen }}</td>
+            <td>{{ $post->mahasiswa->nama_mahasiswa }}</td>
+            <td>{{ $post->matakuliah->nama_matakuliah }}</td>
             <td>{{ $post->keterangan }}</td>
-            <td class="text-center">
+            {{-- <td class="text-center">
                 <form action="{{ route('mahasiswas.destroy',$post->id) }}" method="POST">
  
                     <a class="btn btn-info btn-sm" href="{{ route('absensis.show',$post->id) }}">Absen Disini</a>
@@ -47,11 +45,12 @@
  
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete Absen</button>
                 </form>
-            </td>
+            </td> --}}
         </tr>
         @endforeach
     </table>
  
     {!! $absensis->links() !!}
  
+@include('absensis.modal.create')
 @endsection

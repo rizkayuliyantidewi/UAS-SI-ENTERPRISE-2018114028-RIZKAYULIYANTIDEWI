@@ -82,14 +82,19 @@ class SmtController extends Controller
       */
      public function update(Request $request, $id)
      {
-         $request->validate([
-             'semester'=>'required',
-            
-         ]);
+        $request->validate([
+            'semester'=>'required', 
+        ]);
  
-         Post::update($request->all());
-         return redirect()->route('semesters.index')
-             ->with ('success','Semester updated successfully.');
+        $semester = semester :: where ('id',$id)->first();
+        if(!$semester)
+            abort(404);
+
+        $semester->semester = $request->semester;
+        $semester->save();
+
+        return redirect()->route('semesters.index')
+            ->with ('success','Semester updated successfully.');
      }
  
      /**
@@ -101,7 +106,9 @@ class SmtController extends Controller
      public function destroy($id)
      {
         $semester = semester :: where ('id',$id)->first();
-      $semester -> delete(); return redirect()->route('semesters.index');
-      with('success', 'Semester deleted succesfully');
+        $semester -> delete(); 
+
+        return redirect()->route('semesters.index')
+            ->with('success', 'Semester deleted succesfully');
  }
 }

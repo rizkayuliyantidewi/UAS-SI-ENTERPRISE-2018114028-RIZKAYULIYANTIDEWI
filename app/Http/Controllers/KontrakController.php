@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use\App\Models\kontrak;
+use App\Models\mahasiswa;
+use App\Models\semester;
 
 class KontrakController extends Controller
 {
@@ -14,10 +16,12 @@ class KontrakController extends Controller
      */
      public function index()
      {
-         $kontraks = kontrak::latest()->paginate(5);
-         return view ('kontraks.index',compact('kontraks'))
-         ->with('i',(request()->input('page',1)-1)*5);
-     
+        $kontraks = kontrak::latest()->paginate(5);
+        $mahasiswas = mahasiswa::all();
+        $semesters = semester::all();
+
+        return view ('kontraks.index',compact('kontraks', 'mahasiswas', 'semesters'))
+            ->with('i',(request()->input('page',1)-1)*5);
      }
  
      /**
@@ -25,10 +29,10 @@ class KontrakController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-     public function create()
-     {
-         return view('kontraks.create');
-     }
+    //  public function create()
+    //  {
+    //      return view('kontraks.create');
+    //  }
  
      /**
       * Store a newly created resource in storage.
@@ -68,11 +72,11 @@ class KontrakController extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function edit($id)
-     {
-         $kontrak = kontrak::findOrFail($id);
-         return view('kontraks.edit',['kontrak'=>$kontrak]);
-     }
+    //  public function edit($id)
+    //  {
+    //      $kontrak = kontrak::findOrFail($id);
+    //      return view('kontraks.edit',['kontrak'=>$kontrak]);
+    //  }
  
      /**
       * Update the specified resource in storage.
@@ -83,15 +87,21 @@ class KontrakController extends Controller
       */
      public function update(Request $request, $id)
      {
-         $request->validate([
-          
-                'mahasiswa_id'=>'required',
-                'semester_id' => 'required'
-                ]);
- 
-         Post::update($request->all());
-         return redirect()->route('kontraks.index')
-             ->with ('success','Kontrak updated successfully.');
+        $request->validate([
+            'mahasiswa_id'=>'required',
+            'semester_id' => 'required'
+        ]);
+        
+        $kontrak = kontrak::where('id', $id)->first();
+        if(!$kontrak)
+            abort(404);
+            
+        $kontrak->mahasiswa_id = $request->mahasiswa_id;
+        $kontrak->semester_id = $request->semester_id;
+        $kontrak->save();
+
+        return redirect()->route('kontraks.index')
+            ->with ('success','Kontrak updated successfully.');
      }
  
      /**
@@ -103,8 +113,8 @@ class KontrakController extends Controller
      public function destroy($id)
      {
         $kontrak = kontrak :: where ('id',$id)->first();
-      $kontrak -> delete(); return redirect()->route('kontraks.index');
-      with('success', 'Kontrak Matakuliah deleted succesfully');
+        $kontrak -> delete(); return redirect()->route('kontraks.index')
+            ->with('success', 'Kontrak Matakuliah deleted succesfully');
      }
  }
  

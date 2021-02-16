@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use\App\Models\jadwal;
+use App\Models\matakuliah;
 
 class JdwlController extends Controller
 {
@@ -15,7 +16,9 @@ class JdwlController extends Controller
      public function index()
      {
          $jadwals = jadwal::latest()->paginate(5);
-         return view ('jadwals.index',compact('jadwals'))
+         $matakuliahs = matakuliah::all();
+
+         return view ('jadwals.index',compact('jadwals', 'matakuliahs'))
          ->with('i',(request()->input('page',1)-1)*5);
      
      }
@@ -25,10 +28,10 @@ class JdwlController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-     public function create()
-     {
-         return view('jadwals.create');
-     }
+    //  public function create()
+    //  {
+    //      return view('jadwals.create');
+    //  }
  
      /**
       * Store a newly created resource in storage.
@@ -38,15 +41,26 @@ class JdwlController extends Controller
       */
      public function store(Request $request)
      {
-         $request->validate([
-             'jadwal'=>'required',
-             'matakuliah_id' => 'required',
-            
-         ]);
- 
-         Jadwal::create($request->all());
-         return redirect()->route('jadwals.index')
-             ->with ('success','Jadwal created successfully.');
+        $request->validate([
+            'jadwal'=>'required',
+            'matakuliah_id' => 'required',
+        
+        ]);
+
+        $jadwal = jadwal::where([
+            ['jadwal', $request->jadwal],
+            ['matakuliah_id', $request->matakuliah_id]
+        ])->first();
+
+        if($jadwal)
+        {
+            return redirect()->route('jadwals.index')
+                ->with ('error','Jadwal sudah ada.');
+        }
+
+        jadwal::create($request->all());
+        return redirect()->route('jadwals.index')
+            ->with ('success','Jadwal created successfully.');
      }
  
  
@@ -68,11 +82,11 @@ class JdwlController extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function edit($id)
-     {
-         $jadwal = jadwal::findOrFail($id);
-         return view('jadwals.edit',['jadwal'=>$jadwal]);
-     }
+    //  public function edit($id)
+    //  {
+    //      $jadwal = jadwal::findOrFail($id);
+    //      return view('jadwals.edit',['jadwal'=>$jadwal]);
+    //  }
  
      /**
       * Update the specified resource in storage.
@@ -88,7 +102,14 @@ class JdwlController extends Controller
             'matakuliah_id' => 'required',
          ]);
  
-         Post::update($request->all());
+        $jadwal = jadwal::where('id', $id)->first();
+        if(!$jadwal)
+            abort(404);
+            
+        $jadwal->matakuliah_id = $request->matakuliah_id;
+        $jadwal->jadwal = $request->jadwal;
+        $jadwal->save();
+
          return redirect()->route('jadwals.index')
              ->with ('success','Jadwal updated successfully.');
      }

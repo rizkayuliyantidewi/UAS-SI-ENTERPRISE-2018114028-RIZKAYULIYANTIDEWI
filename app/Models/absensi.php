@@ -10,9 +10,18 @@ class absensi extends Model
     use HasFactory;
     protected $guarded = ['name'];
 
-    public function mahasiswa()
-
+    public function mahasiswas()
     {
-        return $this->hasMany('App\Models\mahasiswa');
+        return $this->hasMany(mahasiswa::class);
+    }
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(mahasiswa::class);
+    }
+
+    public function matakuliah()
+    {
+        return $this->belongsTo(matakuliah::class);
     }
 }

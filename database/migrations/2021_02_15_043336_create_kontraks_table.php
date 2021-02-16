@@ -14,9 +14,9 @@ class CreateKontraksTable extends Migration
     public function up()
     {
         Schema::create('kontraks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('mahasiswa_id');
-            $table->string('semester_id');
+            $table->id();
+            $table->foreignId('mahasiswa_id')->constrained('mahasiswas');
+            $table->foreignId('semester_id')->constrained('semesters');
             $table->timestamps();
         });
     }

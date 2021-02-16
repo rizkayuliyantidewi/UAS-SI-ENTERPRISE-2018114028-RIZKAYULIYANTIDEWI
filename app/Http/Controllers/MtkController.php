@@ -25,10 +25,10 @@ class MtkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('matakuliahs.create');
-    }
+    // public function create()
+    // {
+    //     return view('matakuliahs.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -67,11 +67,11 @@ class MtkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $matakuliah = matakuliah::findOrFail($id);
-        return view('matakuliahs.edit',['matakuliah'=>$matakuliah]);
-    }
+    // public function edit($id)
+    // {
+    //     $matakuliah = matakuliah::findOrFail($id);
+    //     return view('matakuliahs.edit',['matakuliah'=>$matakuliah]);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -87,7 +87,14 @@ class MtkController extends Controller
             'sks' => 'required|numeric',
         ]);
 
-        Post::update($request->all());
+        $matakuliah = matakuliah::where('id', $id)->first();
+        if(!$matakuliah)
+            abort(404);
+
+        $matakuliah->nama_matakuliah = $request->nama_matakuliah;
+        $matakuliah->sks = $request->sks;
+        $matakuliah->save();
+
         return redirect()->route('matakuliahs.index')
             ->with ('success','Matakuliah updated successfully.');
     }
@@ -101,7 +108,9 @@ class MtkController extends Controller
     public function destroy($id)
     {
         $matakuliah = matakuliah :: where ('id',$id)->first();
-        $matakuliah -> delete(); return redirect()->route('matakuliahs.index');
-        with('success', 'Matakuliah deleted succesfully');
+        $matakuliah -> delete(); 
+        
+        return redirect()->route('matakuliahs.index')
+            ->with('success', 'Matakuliah deleted succesfully');
     }
 }

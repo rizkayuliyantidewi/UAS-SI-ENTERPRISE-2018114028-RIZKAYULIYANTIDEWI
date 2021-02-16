@@ -11,8 +11,7 @@ class mahasiswa extends Model
     protected $guarded = ['name'];
 
     public function absensi()
-
     {
-        return $this->hasMany('App\Models\absensi');
+        return $this->hasMany(absensi::class);
     }
 }

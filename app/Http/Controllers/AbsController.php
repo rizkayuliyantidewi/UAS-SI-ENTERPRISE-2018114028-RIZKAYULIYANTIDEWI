@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\absensi;
+use App\Models\mahasiswa;
+use App\Models\matakuliah;
 
 class AbsController extends Controller
 {
@@ -15,7 +17,10 @@ class AbsController extends Controller
     public function index()
     {
         $absensis = absensi::latest()->paginate(5);
-        return view ('absensis.index',compact('absensis'))
+        $mahasiswas = mahasiswa::all();
+        $matakuliahs = matakuliah::all();
+
+        return view ('absensis.index',compact('absensis', 'mahasiswas', 'matakuliahs'))
         ->with('i',(request()->input('page',1)-1)*5);
     
     }
@@ -25,10 +30,10 @@ class AbsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('absensis.create');
-    }
+    // public function create()
+    // {
+    //     return view('absensis.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -39,11 +44,11 @@ class AbsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'tanggal_absen' => 'required',
             'waktu_absen' => 'required',
             'mahasiswa_id' =>'required|numeric',
             'matakuliah_id'=>'required',
             'keterangan'=>'required',
-
         ]);
 
         absensi::create($request->all());
@@ -70,11 +75,11 @@ class AbsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $absensi = absensi::findOrFail($id);
-        return view('absensis.edit',['absensi'=>$absensi]);
-    }
+    // public function edit($id)
+    // {
+    //     $absensi = absensi::findOrFail($id);
+    //     return view('absensis.edit',['absensi'=>$absensi]);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -83,19 +88,19 @@ class AbsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'waktu_absen' => 'required',
-            'mahasiswa_id' =>'required',
-            'matakuliah_id'=>'required',
-            'keterangan'=>'required',
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'waktu_absen' => 'required',
+    //         'mahasiswa_id' =>'required',
+    //         'matakuliah_id'=>'required',
+    //         'keterangan'=>'required',
+    //     ]);
 
-        Post::update($request->all());
-        return redirect()->route('absensis.index')
-            ->with ('success','Absensi updated successfully.');
-    }
+    //     Post::update($request->all());
+    //     return redirect()->route('absensis.index')
+    //         ->with ('success','Absensi updated successfully.');
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -103,10 +108,10 @@ class AbsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        Post::delete();
-        return redirect()->route('absensis.index')
-            ->with ('success','Absensi deleted successfully.');
-    }
+    // public function destroy($id)
+    // {
+    //     Post::delete();
+    //     return redirect()->route('absensis.index')
+    //         ->with ('success','Absensi deleted successfully.');
+    // }
 }

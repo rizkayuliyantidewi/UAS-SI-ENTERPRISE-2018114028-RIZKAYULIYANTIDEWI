@@ -7,7 +7,7 @@ use\App\Models\semester;
 
 class SmtController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -110,5 +110,5 @@ class SmtController extends Controller
 
         return redirect()->route('semesters.index')
             ->with('success', 'Semester deleted succesfully');
- }
+     }
 }

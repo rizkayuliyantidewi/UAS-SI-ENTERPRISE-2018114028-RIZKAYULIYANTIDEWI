@@ -1,6 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\MhsController;
+use App\Http\Controllers\Api\MtkController;
+use App\Http\Controllers\Api\AbsController;
+use App\Http\Controllers\Api\KontrakController;
+use App\Http\Controllers\Api\JdwlController;
+use App\Http\Controllers\Api\SmtController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource('mahasiswas',MhsController::class);
+Route::resource('matakuliahs',MtkController::class);
+Route::resource('absensis',AbsController::class);
+Route::resource('kontraks',KontrakController::class);
+Route::resource('jadwals',JdwlController::class);
+Route::resource('semesters',SmtController::class);

@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\MhsController;
 use App\Http\Controllers\MtkController;
 use App\Http\Controllers\AbsController;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('',[MhsController::class,'index']);
 Route::resource('mahasiswas',MhsController::class);
 Route::resource('matakuliahs',MtkController::class);
 Route::resource('absensis',AbsController::class);
@@ -25,7 +27,6 @@ Route::resource('kontraks',KontrakController::class);
 Route::resource('jadwals',JdwlController::class);
 Route::resource('semesters',SmtController::class);
 
-// Route::get('',[MhsController::class,'index']);
 // Route::get('',[MtkController::class,'index']);
 // Route::get('',[AbsController::class,'index']);
 // Route::get('',[KontrakController::class,'index']);

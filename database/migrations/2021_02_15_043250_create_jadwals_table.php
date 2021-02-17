@@ -15,7 +15,7 @@ class CreateJadwalsTable extends Migration
     {
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('matakuliah_id')->constrained('matakuliahs');
+            $table->foreignId('matakuliah_id')->constrained('matakuliahs')->onDelete('cascade');
             $table->string('jadwal');
             $table->timestamps();
         });

@@ -15,8 +15,8 @@ class CreateKontraksTable extends Migration
     {
         Schema::create('kontraks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mahasiswa_id')->constrained('mahasiswas');
-            $table->foreignId('semester_id')->constrained('semesters');
+            $table->foreignId('mahasiswa_id')->constrained('mahasiswas')->onDelete('cascade');
+            $table->foreignId('semester_id')->constrained('semesters')->onDelete('cascade');
             $table->timestamps();
         });
     }
